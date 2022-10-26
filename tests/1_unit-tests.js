@@ -8,28 +8,28 @@ suite('Unit Tests', function () {
       assert.isNull(null, 'This is an optional error description - e.g. null is null');
       assert.isNotNull(1, '1 is not null');
     });
-    //// #2
-    //test('#isDefined, #isUndefined', function () {
-      //assert.fail(null, 'null is not undefined');
-      //assert.fail(undefined, 'undefined IS undefined');
-      //assert.fail('hello', 'A string is not undefined');
-    //});
-    //// #3
-    //test('#isOk, #isNotOk', function () {
-      //assert.fail(null, 'null is falsey');
-      //assert.fail("I'm truthy", 'A string is truthy');
-      //assert.fail(true, 'true is truthy');
-    //});
-    //// #4
-    //test('#isTrue, #isNotTrue', function () {
-      //assert.fail(true, 'true is true');
-      //assert.fail(!!'double negation', 'Double negation of a truthy value is true');
-      //assert.fail({ value: 'truthy' }, 'Objects are truthy, but are not boolean values');
-    //});
-  //});
-//
-  //// -----------------------------------------------------------------------------
-//
+    // #2
+    test('#isDefined, #isUndefined', function () {
+      assert.isDefined(null, 'null is not undefined');
+      assert.isUndefined(undefined, 'undefined IS undefined');
+      assert.isDefined('hello', 'A string is not undefined');
+    });
+    // #3
+    test('#isOk, #isNotOk', function () {
+      assert.isNotOk(null, 'null is falsey');
+      assert.isOk("I'm truthy", 'A string is truthy');
+      assert.isOk(true, 'true is truthy');
+    });
+    // #4
+    test('#isTrue, #isNotTrue', function () {
+      assert.isTrue(true, 'true is true');
+      assert.isTrue(!!'double negation', 'Double negation of a truthy value is true');
+      assert.isNotTrue({ value: 'truthy' }, 'Objects are truthy, but are not boolean values');
+    });
+  });
+
+  // -----------------------------------------------------------------------------
+
   //suite('Equality', function () {
     //// #5
     //test('#equal, #notEqual', function () {
@@ -162,7 +162,7 @@ suite('Unit Tests', function () {
       //assert.fail(airlinePlane, Object);
       //assert.fail(myCar.wheels, String);
     //});
-  });
+  //});
 
   // -----------------------------------------------------------------------------
 });
