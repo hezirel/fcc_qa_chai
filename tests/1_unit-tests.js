@@ -79,90 +79,82 @@ suite('Unit Tests', function () {
       assert.approximately(weirdNumbers(0.2), 1, 0.80);
     });
   });
-//
   //// -----------------------------------------------------------------------------
-//
-  //const winterMonths = ['dec,', 'jan', 'feb', 'mar'];
-  //const backendLanguages = ['php', 'python', 'javascript', 'ruby', 'asp'];
-  //suite('Arrays', function () {
-    //// #11
-    //test('#isArray, #isNotArray', function () {
-      //assert.fail('isThisAnArray?'.split(''), 'String.prototype.split() returns an array');
-      //assert.fail([1, 2, 3].indexOf(2), 'indexOf returns a number');
-    //});
-    //// #12
-    //test('Array #include, #notInclude', function () {
-      //assert.fail(winterMonths, 'jul', "It's summer in july...");
-      //assert.fail(backendLanguages, 'javascript', 'JS is a backend language');
-    //});
-  //});
-//
+  const winterMonths = ['dec,', 'jan', 'feb', 'mar'];
+  const backendLanguages = ['php', 'python', 'javascript', 'ruby', 'asp'];
+  suite('Arrays', function () {
+    // #11
+    test('#isArray, #isNotArray', function () {
+      assert.isArray('isThisAnArray?'.split(''), 'String.prototype.split() returns an array');
+      assert.isNotArray([1, 2, 3].indexOf(2), 'indexOf returns a number');
+    });
+    // #12
+    test('Array #include, #notInclude', function () {
+      assert.notInclude(winterMonths, 'jul', "It's summer in july...");
+      assert.include(backendLanguages, 'javascript', 'JS is a backend language');
+    });
+  });
   //// -----------------------------------------------------------------------------
-//
-  //const formatPeople = function (name, age) {
-    //return '# name: ' + name + ', age: ' + age + '\n';
-  //};
-  //suite('Strings', function () {
-    //// #13
-    //test('#isString, #isNotString', function () {
-      //assert.fail(Math.sin(Math.PI / 4), 'A float is not a string');
-      //assert.fail(process.env.PATH, 'An env variable is a string (or undefined)');
-      //assert.fail(JSON.stringify({ type: 'object' }), 'JSON is a string');
-    //});
-    //// #14
-    //test('String #include, #notInclude', function () {
-      //assert.fail('Arrow', 'row', "'Arrow' contains 'row'");
-      //assert.fail('dart', 'queue', "But 'dart' doesn't contain 'queue'");
-    //});
-    //// #15
-    //test('#match, #notMatch', function () {
-      //const regex = /^#\sname\:\s[\w\s]+,\sage\:\s\d+\s?$/;
-      //assert.fail(formatPeople('John Doe', 35), regex);
-      //assert.fail(formatPeople('Paul Smith III', 'twenty-four'), regex);
-    //});
-  //});
-//
+  const formatPeople = function (name, age) {
+    return '# name: ' + name + ', age: ' + age + '\n';
+  };
+  suite('Strings', function () {
+    // #13
+    test('#isString, #isNotString', function () {
+      assert.isNotString(Math.sin(Math.PI / 4), 'A float is not a string');
+      assert.isString(process.env.PATH, 'An env variable is a string (or undefined)');
+      assert.isString(JSON.stringify({ type: 'object' }), 'JSON is a string');
+    });
+    // #14
+    test('String #include, #notInclude', function () {
+      assert.include('Arrow', 'row', "'Arrow' contains 'row'");
+      assert.notInclude('dart', 'queue', "But 'dart' doesn't contain 'queue'");
+    });
+    // #15
+    test('#match, #notMatch', function () {
+      const regex = /^#\sname\:\s[\w\s]+,\sage\:\s\d+\s?$/;
+      assert.match(formatPeople('John Doe', 35), regex);
+      assert.notMatch(formatPeople('Paul Smith III', 'twenty-four'), regex);
+    });
+  });
   //// -----------------------------------------------------------------------------
-//
-  //const Car = function () {
-    //this.model = 'sedan';
-    //this.engines = 1;
-    //this.wheels = 4;
-  //};
-//
-  //const Plane = function () {
-    //this.model = '737';
-    //this.engines = ['left', 'right'];
-    //this.wheels = 6;
-    //this.wings = 2;
-  //};
-//
-  //const myCar = new Car();
-  //const airlinePlane = new Plane();
-//
-  //suite('Objects', function () {
-    //// #16
-    //test('#property, #notProperty', function () {
-      //assert.fail(myCar, 'wings', "Cars don't have wings");
-      //assert.fail(airlinePlane, 'engines', 'Planes have engines');
-      //assert.fail(myCar, 'wheels', 'Cars have wheels');
-    //});
-    //// #17
-    //test('#typeOf, #notTypeOf', function () {
-      //assert.fail(myCar, 'object');
-      //assert.fail(myCar.model, 'string');
-      //assert.fail(airlinePlane.wings, 'string');
-      //assert.fail(airlinePlane.engines, 'array');
-      //assert.fail(myCar.wheels, 'number');
-    //});
-    //// #18
-    //test('#instanceOf, #notInstanceOf', function () {
-      //assert.fail(myCar, Plane);
-      //assert.fail(airlinePlane, Plane);
-      //assert.fail(airlinePlane, Object);
-      //assert.fail(myCar.wheels, String);
-    //});
-  //});
+  const Car = function () {
+    this.model = 'sedan';
+    this.engines = 1;
+    this.wheels = 4;
+  };
 
-  // -----------------------------------------------------------------------------
+  const Plane = function () {
+    this.model = '737';
+    this.engines = ['left', 'right'];
+    this.wheels = 6;
+    this.wings = 2;
+  };
+
+  const myCar = new Car();
+  const airlinePlane = new Plane();
+
+  suite('Objects', function () {
+    // #16
+    test('#property, #notProperty', function () {
+      assert.notProperty(myCar, 'wings', "Cars don't have wings");
+      assert.property(airlinePlane, 'engines', 'Planes have engines');
+      assert.property(myCar, 'wheels', 'Cars have wheels');
+    });
+    // #17
+    test('#typeOf, #notTypeOf', function () {
+      assert.typeOf(myCar, 'object');
+      assert.typeOf(myCar.model, 'string');
+      assert.notTypeOf(airlinePlane.wings, 'string');
+      assert.typeOf(airlinePlane.engines, 'array');
+      assert.typeOf(myCar.wheels, 'number');
+    });
+    // #18
+    test('#instanceOf, #notInstanceOf', function () {
+      assert.notInstanceOf(myCar, Plane);
+      assert.instanceOf(airlinePlane, Plane);
+      assert.instanceOf(airlinePlane, Object);
+      assert.notInstanceOf(myCar.wheels, String);
+    });
+  });
 });
